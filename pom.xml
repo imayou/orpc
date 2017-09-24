@@ -20,14 +20,14 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
-			    <artifactId>sonar-maven-plugin</artifactId>
-			    <version>3.1.1</version>
-	        </plugin>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.1.1</version>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -35,7 +35,7 @@
 					<source>1.8</source>
 					<target>1.8</target>
 					<compilerArguments>
-						<verbose/>
+						<verbose />
 						<!-- C:\Program Files\Java\jdk1.8.0_91 -->
 						<!-- <bootclasspath>${java.home}\lib\rt.jar;${java.home}\lib\jce.jar</bootclasspath> -->
 					</compilerArguments>
