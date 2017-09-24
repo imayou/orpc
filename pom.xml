@@ -35,7 +35,7 @@
 					<source>1.8</source>
 					<target>1.8</target>
 					<compilerArguments>
-						<verbose />
+						<verbose/>
 						<!-- C:\Program Files\Java\jdk1.8.0_91 -->
 						<!-- <bootclasspath>${java.home}\lib\rt.jar;${java.home}\lib\jce.jar</bootclasspath> -->
 					</compilerArguments>
