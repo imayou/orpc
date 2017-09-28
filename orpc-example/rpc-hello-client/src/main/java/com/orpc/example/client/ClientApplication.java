@@ -8,9 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.orpc.client.RpcClient;
 import com.orpc.example.api.HelloService;
+import com.orpc.example.api.UserService;
+import com.orpc.example.domain.User;
 
 @SpringBootApplication(scanBasePackages = "com.orpc")
-public class HelloClientApplication {
+public class ClientApplication {
 
 	@Autowired
 	private RpcClient rpcClient;
@@ -20,10 +22,14 @@ public class HelloClientApplication {
 		HelloService helloService = rpcClient.create(HelloService.class);
 		String result = helloService.say("world");
 		System.err.println(result);
+
+		UserService userService = rpcClient.create(UserService.class);
+		User user = userService.view(111000L);
+		System.err.println("User返回： "+user);
 	}
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(HelloClientApplication.class, args);
+		SpringApplication.run(ClientApplication.class, args).close();
 	}
 
 }
