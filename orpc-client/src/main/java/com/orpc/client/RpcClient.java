@@ -64,7 +64,6 @@ public class RpcClient {
 						int port = Integer.parseInt(array[1]);
 						// 发送RPC请求
 						RpcResponse response = send(request, host, port);
-						System.out.println(response);
 						if (response == null) {
 							logger.error("send request failure", new IllegalStateException("response is null"));
 							return null;
@@ -72,9 +71,6 @@ public class RpcClient {
 						if (response.hasException()) {
 							logger.error("response has exception", response.getException());
 							return null;
-						}
-						if(null != response.getResult()) {
-							System.out.println(response.getResult());
 						}
 						// 获取响应结果
 						return response.getResult();
@@ -111,7 +107,7 @@ public class RpcClient {
 			// 关闭RPC链接
 			group.shutdownGracefully();
 			// 移除请求编号与响应对象之间的映射关系
-			//responseMap.remove(request.getRequestId());
+			responseMap.remove(request.getRequestId());
 		}
 
 	}
