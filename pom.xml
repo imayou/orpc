@@ -8,7 +8,6 @@
 		<module>orpc-common</module>
 		<module>orpc-registry</module>
 		<module>orpc-server</module>
-		<module>orion-client</module>
 		<module>orpc-client</module>
 	</modules>
 
