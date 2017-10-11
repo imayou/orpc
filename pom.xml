@@ -9,6 +9,7 @@
 		<module>orpc-registry</module>
 		<module>orpc-server</module>
 		<module>orpc-client</module>
+		<module>orpc</module>
 	</modules>
 
 	<dependencies>
@@ -38,6 +39,44 @@
 						<!-- C:\Program Files\Java\jdk1.8.0_91 -->
 						<!-- <bootclasspath>${java.home}\lib\rt.jar;${java.home}\lib\jce.jar</bootclasspath> -->
 					</compilerArguments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<addMavenDescriptor>true</addMavenDescriptor>
+						<index>true</index>
+						<manifest>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20.1</version>
+				<configuration>
+					<useSystemClassLoader>true</useSystemClassLoader>
+					<forkMode>once</forkMode>
+					<argLine>${argline}</argLine>
+					<!-- <systemProperties>
+						common shared
+						<property>
+							<name>transporter</name>
+							<value>${transporter}</value>
+						</property>
+					</systemProperties> -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>${skip_maven_deploy}</skip>
 				</configuration>
 			</plugin>
 		</plugins>

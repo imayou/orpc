@@ -20,5 +20,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.orpc</groupId>
+			<artifactId>orpc</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 </project>

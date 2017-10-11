@@ -1,6 +1,5 @@
 package com.orpc.server;
 
-import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -12,6 +11,8 @@ import com.orpc.common.core.RpcResponse;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import net.sf.cglib.reflect.FastClass;
+import net.sf.cglib.reflect.FastMethod;
 
 public class RpcServiceHandler extends SimpleChannelInboundHandler<RpcRequest> {
 
@@ -52,10 +53,15 @@ public class RpcServiceHandler extends SimpleChannelInboundHandler<RpcRequest> {
 		String methodName = request.getMethodName();
 		Class<?>[] parameterTypes = request.getParameterTypes();
 		Object[] parameters = request.getParameters();
+		
 		// 反射
-		Method method = serviceClass.getMethod(methodName, parameterTypes);
+		/*Method method = serviceClass.getMethod(methodName, parameterTypes);
 		method.setAccessible(true);
-		return method.invoke(serviceBean, parameters);
+		return method.invoke(serviceBean, parameters);*/
+		// Cglib reflect
+        FastClass serviceFastClass = FastClass.create(serviceClass);
+        FastMethod serviceFastMethod = serviceFastClass.getMethod(methodName, parameterTypes);
+        return serviceFastMethod.invoke(serviceBean, parameters);
 	}
 
 	@Override

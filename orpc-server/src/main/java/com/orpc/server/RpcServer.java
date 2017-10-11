@@ -34,7 +34,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 public class RpcServer implements ApplicationContextAware, InitializingBean {
 	private static final Logger logger = LoggerFactory.getLogger(RpcServiceHandler.class);
 
-	@Value("${orpc.port}")
+	@Value("${orpc.port:0}")
 	private int port;
 
 	@Autowired
@@ -44,6 +44,9 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
 
 	@Override
 	public void setApplicationContext(ApplicationContext ctx) throws BeansException {
+		if (port == 0) {//客户端
+			return;
+		}
 		// 扫描带有@RpcService注解的服务类
 		Map<String, Object> serviceBeanMap = ctx.getBeansWithAnnotation(RpcService.class);
 		if (!serviceBeanMap.isEmpty()) {
@@ -57,6 +60,9 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
+		if (port == 0) {//客户端
+			return;
+		}
 		EventLoopGroup group = new NioEventLoopGroup();
 		EventLoopGroup childGroup = new NioEventLoopGroup();
 		try {
