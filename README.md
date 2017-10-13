@@ -1,4 +1,8 @@
 # orpc
 a simple rpc framework
 
-under development...
+
+mvn clean source:jar install
+
+然后可以通过例子查看效果
+
